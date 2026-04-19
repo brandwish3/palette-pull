@@ -1,0 +1,23 @@
+{
+  "name": "palette-pull",
+  "version": "0.1.0",
+  "description": "Extract and export color palettes from design files or URLs into various token formats",
+  "main": "src/index.js",
+  "bin": {
+    "palette-pull": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "commander": "^11.1.0",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "license": "MIT"
+}

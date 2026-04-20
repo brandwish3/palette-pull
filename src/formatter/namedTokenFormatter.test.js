@@ -22,6 +22,13 @@ describe('namedTokenFormatter', () => {
     it('should return empty array for empty input', () => {
       expect(assignTokenNames([])).toEqual([]);
     });
+
+    it('should produce unique token names for each color', () => {
+      const result = assignTokenNames(mockColors);
+      const tokens = result.map((entry) => entry.token);
+      const uniqueTokens = new Set(tokens);
+      expect(uniqueTokens.size).toBe(tokens.length);
+    });
   });
 
   describe('formatNamedCSS', () => {
@@ -51,6 +58,12 @@ describe('namedTokenFormatter', () => {
         expect(key).toMatch(/^color-/);
         expect(parsed[key]).toMatch(/^#/);
       });
+    });
+
+    it('should return valid JSON for empty input', () => {
+      const result = formatNamedJSON([]);
+      expect(() => JSON.parse(result)).not.toThrow();
+      expect(Object.keys(JSON.parse(result)).length).toBe(0);
     });
   });
 

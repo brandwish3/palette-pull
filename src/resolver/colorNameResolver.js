@@ -30,9 +30,13 @@ const NAMED_COLORS = {
  * Parses a hex color string into [r, g, b] components.
  * @param {string} hex - Normalized 6-digit hex string (e.g. '#ff0000')
  * @returns {number[]}
+ * @throws {Error} If the hex string is not a valid 6-digit hex color
  */
 function hexToRgb(hex) {
   const clean = hex.replace('#', '');
+  if (!/^[0-9a-f]{6}$/i.test(clean)) {
+    throw new Error(`Invalid hex color: "${hex}". Expected a 6-digit hex string (e.g. '#ff0000').`);
+  }
   return [
     parseInt(clean.substring(0, 2), 16),
     parseInt(clean.substring(2, 4), 16),
@@ -58,6 +62,7 @@ function colorDistance(a, b) {
  * Resolves the closest named color for a given hex value.
  * @param {string} hex - Normalized hex color string
  * @returns {string} Color name
+ * @throws {Error} If the hex string is invalid
  */
 function resolveColorName(hex) {
   const normalized = hex.toLowerCase();
